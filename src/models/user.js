@@ -19,6 +19,10 @@ const User = mongoose.Schema(
     phone: {
       type: String,
     },
+    favorites: {
+      type: Array,
+      default: [],
+    },
     role: {
       type: String,
       default: "user",
