@@ -22,6 +22,7 @@ app.use(morgan("dev"));
 
 app.use("/user", routers.user);
 app.use("/genre", routers.genre);
+app.use("/artist", routers.artist);
 
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
