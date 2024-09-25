@@ -16,6 +16,22 @@ const getAllGenre = async (req, res, next) => {
   }
 };
 
+const getGenreById = async (req, res, next) => {
+  try {
+    const id = req.query.id;
+    const genre = await genreServices.getGenreById(id);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: genre });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
 const createGenre = async (req, res, next) => {
   try {
     const { name, image, decription, slug } = req.body;
@@ -79,6 +95,7 @@ const deleteGenre = async (req, res, next) => {
 
 export const genreControllers = {
   getAllGenre,
+  getGenreById,
   createGenre,
   updateGenre,
   deleteGenre,

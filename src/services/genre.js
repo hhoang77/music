@@ -8,6 +8,18 @@ const getAllGenre = async () => {
   }
 };
 
+const getGenreById = async (id) => {
+  try {
+    const genre = await GenreModel.findById(id);
+    if (!genre) {
+      throw Error("Genre Not Found");
+    }
+    return genre;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const createGenre = async ({ name, image, decription, slug }) => {
   try {
     const genre = await GenreModel.findOne({ name });
@@ -50,6 +62,7 @@ const deleteGenre = async (id) => {
 
 export const genreServices = {
   getAllGenre,
+  getGenreById,
   createGenre,
   updateGenre,
   deleteGenre,

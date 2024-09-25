@@ -5,6 +5,7 @@ import uploadCloud from "../middlewares/cloudinary.js";
 const router = express.Router();
 
 router.route("/").get(genreControllers.getAllGenre);
+router.route("/getById").get(genreControllers.getGenreById);
 router
   .route("/create")
   .post(uploadCloud.single("image"), genreControllers.createGenre);
