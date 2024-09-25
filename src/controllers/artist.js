@@ -16,6 +16,22 @@ const getAllArtist = async (req, res, next) => {
   }
 };
 
+const getArtistById = async (req, res, next) => {
+  try {
+    const id = req.query.id;
+    const artist = await artistServices.getArtistById(id);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: artist });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
 const createArtist = async (req, res, next) => {
   try {
     const { name, avarta, gender, bio } = req.body;
@@ -79,6 +95,7 @@ const deleteArtist = async (req, res, next) => {
 
 export const artistControllers = {
   getAllArtist,
+  getArtistById,
   createArtist,
   updateArtist,
   deleteArtist,

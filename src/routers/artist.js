@@ -5,6 +5,7 @@ import uploadCloud from "../middlewares/cloudinary.js";
 const router = express.Router();
 
 router.route("/").get(artistControllers.getAllArtist);
+router.route("/getById").get(artistControllers.getArtistById);
 router
   .route("/create")
   .post(uploadCloud.single("avarta"), artistControllers.createArtist);
