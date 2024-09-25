@@ -10,9 +10,12 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  allowedFormats: ["jpg", "png"],
-  params: {
-    folder: "spotify",
+  params: async (req, file) => {
+    return {
+      folder: "spotify",
+      resource_type: "auto",
+      allowedFormats: ["jpeg", "png", "jpg", "mp3"],
+    };
   },
 });
 
