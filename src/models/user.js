@@ -19,10 +19,20 @@ const User = mongoose.Schema(
     phone: {
       type: String,
     },
-    favorites: {
-      type: Array,
-      default: [],
-    },
+    favoriteSong: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Song",
+        default: [],
+      },
+    ],
+    favoriteArtist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Artist",
+        default: [],
+      },
+    ],
     role: {
       type: String,
       default: "user",

@@ -78,9 +78,83 @@ const refreshToken = async (req, res, next) => {
   }
 };
 
+const updateAvarta = async (req, res, next) => {
+  try {
+    const id = req.userId;
+    const { image } = req.body;
+    const imageFile = req.file;
+    const user = await userServices.updateAvarta(id, {
+      image: imageFile?.path,
+    });
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
+const updateFavoriteSong = async (req, res, next) => {
+  try {
+    const id = req.userId;
+    const { songId } = req.body;
+    const user = await userServices.updateFavoriteSong(id, { songId });
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
+const updateFavoriteArtist = async (req, res, next) => {
+  try {
+    const id = req.userId;
+    const { artistId } = req.body;
+    const user = await userServices.updateFavoriteArtist(id, { artistId });
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const id = req.query.id;
+    const user = await userServices.deleteUser(id);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
 export const userControllers = {
   getAllUser,
   register,
   login,
   refreshToken,
+  updateAvarta,
+  updateFavoriteSong,
+  updateFavoriteArtist,
+  deleteUser,
 };
