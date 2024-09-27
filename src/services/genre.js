@@ -40,7 +40,7 @@ const updateGenre = async (id, { name, image, decription, slug }) => {
     }
     return await GenreModel.findByIdAndUpdate(
       id,
-      { name, image, decription },
+      { name, image, decription, slug },
       { new: true }
     );
   } catch (error) {

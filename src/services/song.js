@@ -34,7 +34,7 @@ const getSongByGenre = async (genre) => {
       genre === "nhac-hip-hop" ||
       genre === "nhac-pop" ||
       genre === "nhac-ballad" ||
-      genre === "nhac-dan-gian"
+      genre === "nhac-que-huong"
     ) {
       filteredSongs = songs.filter((item) => item.genreId.slug === genre);
     }
