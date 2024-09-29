@@ -24,6 +24,7 @@ app.use("/user", routers.user);
 app.use("/genre", routers.genre);
 app.use("/artist", routers.artist);
 app.use("/song", routers.song);
+app.use("/postCard", routers.postCard);
 
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
