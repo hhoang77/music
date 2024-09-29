@@ -22,5 +22,6 @@ router
 router
   .route("/favoriteArtist")
   .put(validateToken, userControllers.updateFavoriteArtist);
+router.route("/upToPremium").put(validateToken, userControllers.upToPremium);
 router.route("/delete").delete(userControllers.deleteUser);
 export default router;

@@ -33,6 +33,11 @@ const User = mongoose.Schema(
         default: [],
       },
     ],
+    subscriptionType: {
+      type: String,
+      enum: ["free", "fee"],
+      default: "free",
+    },
     role: {
       type: String,
       default: "user",

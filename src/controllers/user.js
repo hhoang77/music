@@ -98,6 +98,22 @@ const updateAvarta = async (req, res, next) => {
   }
 };
 
+const upToPremium = async (req, res, next) => {
+  try {
+    const id = req.userId;
+    const user = await userServices.upToPremium(id);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
 const updateFavoriteSong = async (req, res, next) => {
   try {
     const id = req.userId;
@@ -156,5 +172,6 @@ export const userControllers = {
   updateAvarta,
   updateFavoriteSong,
   updateFavoriteArtist,
+  upToPremium,
   deleteUser,
 };

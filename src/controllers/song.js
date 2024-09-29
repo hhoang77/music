@@ -121,6 +121,22 @@ const updateSong = async (req, res, next) => {
   }
 };
 
+const searchItem = async (req, res, next) => {
+  try {
+    const searchTerm = req.query.q;
+    const item = await songServices.searchItem(searchTerm);
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: item });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
 const deleteSong = async (req, res, next) => {
   try {
     const id = req.query.id;
@@ -142,6 +158,7 @@ export const songControllers = {
   getSongById,
   getSongByGenre,
   getSongByArtist,
+  searchItem,
   createSong,
   updateSong,
   deleteSong,

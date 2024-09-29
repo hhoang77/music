@@ -9,6 +9,7 @@ router.route("/getById").get(songControllers.getSongById);
 
 router.route("/getByGenre/:genre").get(songControllers.getSongByGenre);
 router.route("/getByArtist/").get(songControllers.getSongByArtist);
+router.route("/searchItem/").get(songControllers.searchItem);
 
 router.route("/create").post(
   uploadCloud.fields([

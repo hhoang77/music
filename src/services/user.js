@@ -121,6 +121,19 @@ const updateFavoriteArtist = async (id, { artistId }) => {
   }
 };
 
+const upToPremium = async (id) => {
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      throw Error("User Not Found");
+    }
+    user.subscriptionType = "fee";
+    return await user.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteUser = async (id) => {
   try {
     const user = await UserModel.findById(id);
@@ -141,5 +154,6 @@ export const userServices = {
   updateAvarta,
   updateFavoriteSong,
   updateFavoriteArtist,
+  upToPremium,
   deleteUser,
 };

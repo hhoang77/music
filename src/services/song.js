@@ -1,4 +1,6 @@
 import SongModel from "../models/song.js";
+import ArtistModel from "../models/artist.js"; // Đường dẫn tới file Artist.js
+import GenreModel from "../models/genre.js";
 
 const getAllSong = async () => {
   try {
@@ -58,6 +60,32 @@ const getSongByArtist = async (id) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const searchItem = async (searchTerm) => {
+  const regex = new RegExp(searchTerm, "i");
+  const songResults = await SongModel.find({ name: regex });
+  const artistResults = await ArtistModel.find({ name: regex });
+
+  const results = [];
+  songResults.forEach((songs) => {
+    results.push({
+      _id: songs._id,
+      name: songs.name,
+      image: songs.image,
+      type: "song",
+    });
+  });
+  artistResults.forEach((artists) => {
+    results.push({
+      _id: artists._id,
+      name: artists.name,
+      image: artists.avarta,
+      type: "artist",
+    });
+  });
+
+  return results;
 };
 
 const createSong = async ({
@@ -132,6 +160,7 @@ export const songServices = {
   getSongById,
   getSongByGenre,
   getSongByArtist,
+  searchItem,
   createSong,
   updateSong,
   deleteSong,
