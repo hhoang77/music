@@ -127,8 +127,11 @@ const upToPremium = async (id) => {
     if (!user) {
       throw Error("User Not Found");
     }
-    user.subscriptionType = "fee";
-    return await user.save();
+    if (user.subscriptionType == "free") {
+      user.subscriptionType = "fee";
+      return await user.save();
+    }
+    return null;
   } catch (error) {
     console.log(error);
   }
