@@ -148,6 +148,28 @@ const updateFavoriteArtist = async (req, res, next) => {
   }
 };
 
+const updateUserByAdmin = async (req, res, next) => {
+  try {
+    const id = req.userId;
+    const { username, email, phone, role } = req.body;
+    const user = await userServices.updateRole(id, {
+      username,
+      email,
+      phone,
+      role,
+    });
+    return res
+      .status(StatusCodes.OK)
+      .json({ status: 200, message: "Xử lý thành công", content: user });
+  } catch (error) {
+    console.log(error);
+    next(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ status: 500, message: "Server Error" });
+  }
+};
+
 const deleteUser = async (req, res, next) => {
   try {
     const id = req.query.id;
@@ -173,5 +195,6 @@ export const userControllers = {
   updateFavoriteSong,
   updateFavoriteArtist,
   upToPremium,
+  updateUserByAdmin,
   deleteUser,
 };

@@ -137,6 +137,22 @@ const upToPremium = async (id) => {
   }
 };
 
+const updateUserByAdmin = async (id, { username, email, phone, role }) => {
+  try {
+    const user = UserModel.findById(id);
+    if (!user) {
+      throw Error("User Not Found");
+    }
+    return await findByIdAndUpdate(
+      id,
+      { username, email, phone, role },
+      { new: true }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteUser = async (id) => {
   try {
     const user = await UserModel.findById(id);
@@ -158,5 +174,6 @@ export const userServices = {
   updateFavoriteSong,
   updateFavoriteArtist,
   upToPremium,
+  updateUserByAdmin,
   deleteUser,
 };
