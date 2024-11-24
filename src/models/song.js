@@ -20,6 +20,7 @@ const Song = mongoose.Schema({
   },
   playCount: {
     type: Number,
+    default: 0,
   },
   artistId: {
     type: mongoose.Schema.Types.ObjectId,

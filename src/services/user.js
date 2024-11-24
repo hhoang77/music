@@ -137,15 +137,19 @@ const upToPremium = async (id) => {
   }
 };
 
-const updateUserByAdmin = async (id, { username, email, phone, role }) => {
+const updateUserByAdmin = async (
+  id,
+  { username, subscriptionType, phone, role }
+) => {
   try {
     const user = UserModel.findById(id);
+
     if (!user) {
       throw Error("User Not Found");
     }
-    return await findByIdAndUpdate(
+    return await UserModel.findByIdAndUpdate(
       id,
-      { username, email, phone, role },
+      { username, subscriptionType, phone, role },
       { new: true }
     );
   } catch (error) {

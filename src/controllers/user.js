@@ -150,11 +150,11 @@ const updateFavoriteArtist = async (req, res, next) => {
 
 const updateUserByAdmin = async (req, res, next) => {
   try {
-    const id = req.userId;
-    const { username, email, phone, role } = req.body;
-    const user = await userServices.updateRole(id, {
+    const id = req.query.id;
+    const { username, subscriptionType, phone, role } = req.body;
+    const user = await userServices.updateUserByAdmin(id, {
       username,
-      email,
+      subscriptionType,
       phone,
       role,
     });

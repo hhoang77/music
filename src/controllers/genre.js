@@ -6,7 +6,7 @@ const getAllGenre = async (req, res, next) => {
     const genre = await genreServices.getAllGenre();
     return res
       .status(StatusCodes.OK)
-      .json({ status: 200, message: "Xử lý thành công", cotent: genre });
+      .json({ status: 200, message: "Xử lý thành công", content: genre });
   } catch (error) {
     console.log(error);
     next(error);
