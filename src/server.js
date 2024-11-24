@@ -30,7 +30,6 @@ app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
   err.status = "fail";
   err.statusCode = 404;
-
   next(err);
 });
 
@@ -41,6 +40,9 @@ app.use((error, req, res, next) => {
     status: error.statusCode,
     message: error.message,
   });
+});
+app.get("/", (req, res) => {
+  res.send("Hello, Node.js!");
 });
 
 app.listen(port, (req, res) => {
