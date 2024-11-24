@@ -26,6 +26,9 @@ app.use("/artist", routers.artist);
 app.use("/song", routers.song);
 app.use("/postCard", routers.postCard);
 
+app.get("/", (req, res) => {
+  res.send("Hello, Node.js!");
+});
 app.all("*", (req, res, next) => {
   const err = new Error(`Can't find ${req.originalUrl} on the server`);
   err.status = "fail";
@@ -40,9 +43,6 @@ app.use((error, req, res, next) => {
     status: error.statusCode,
     message: error.message,
   });
-});
-app.get("/", (req, res) => {
-  res.send("Hello, Node.js!");
 });
 
 app.listen(port, (req, res) => {
