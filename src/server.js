@@ -9,10 +9,9 @@ import { connectDB } from "./configs/connectDb.js";
 import { corsOptions } from "./configs/cors.js";
 
 const port = process.env.PORT;
-connectDB();
 
 const app = express();
-
+connectDB();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
